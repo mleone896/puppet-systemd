@@ -11,7 +11,7 @@ define systemd::unit (
 ) {
 
 
-  $unit_path        = '/usr/lib/systemd/system'
+  $unit_path        = '/etc/systemd/system'
 
 
 
