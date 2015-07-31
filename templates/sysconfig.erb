@@ -1,0 +1,22 @@
+<%- if @service_name == 'unkafka' -%>
+KAFKA_TOPIC="<%= @service_item %>"
+<%- end %>
+<%- if @s3_secret_key %>
+S3_ACCESS_SECRET="<%= @s3_secret_key %>"
+<%- end %>
+<%- if scope.lookupvar('digestion::beacon_key') %>
+BEACON_KEY_23538C904E4C4183A32B381CFD11C464= <%= scope.lookupvar('digestion::beacon_key') %>
+<%- end %>
+<%- if @s3_access_key %>
+S3_ACCESS_KEY="<%= @s3_access_key %>"
+<%- end %>
+<%- if @port %>
+PORT="<%= @port %>"
+TORNADO_PORT="${PORT}"
+<% end %>
+<%- exports = scope.lookupvar('systemd::service_exports') -%>
+<%- if exports  %>
+<%- exports.each do |key, value| -%>
+<%= key.upcase %>="<%= value %>"
+<%- end -%>
+<%- end %>

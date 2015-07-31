@@ -1,0 +1,16 @@
+[Unit]
+Description=<%= @description %>
+After=syslog.target network.target basic.target
+
+[Service]
+Type=simple
+<%- if @environment_file %>
+EnvironmentFile=<%= @environment_file_location %>
+<%- end %>
+<%- if @user %>
+User=<%= @user %>
+<%- end %>
+<%- if @pidfile %>
+PIDFile= <%= @pidfile %>
+<%- end %>
+ExecStart=<%= @start_command %>
