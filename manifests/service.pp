@@ -1,4 +1,4 @@
-define systemd::unit (
+define systemd::service(
   $template_file             = 'service.target.erb',
   $environment_file          = false,
   $environment_file_location = "/etc/sysconfig/${title}",
@@ -11,22 +11,22 @@ define systemd::unit (
 ) {
 
 
-  $unit_path        = '/etc/systemd/system'
+  $service_path        = '/etc/systemd/system'
 
 
 
   # tell systemd to reload
-  exec { 'systemd-daemon-reload':
+  exec { "systemd-daemon-reload-${title}":
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
     command     => 'systemctl daemon-reload',
     refreshonly => true,
     before      => Service[$title],
   }
   # create the service file from a template
-  file {"${unit_path}/${title}.service":
+  file { "${service_path}/${title}.service":
     content => template("systemd/${template_file}"),
     before  => Service[$title],
-    notify  => Exec['systemd-daemon-reload']
+    notify  => Exec["systemd-daemon-reload-${title}"]
   }
 
   # check to see if we have env vars
