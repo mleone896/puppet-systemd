@@ -18,7 +18,7 @@ define systemd::service(
   $timeout_stop_sec            = undef,
   $timout_sec                  = undef,
   $restart                     = undef,
-  $description                 = 'generice service description',
+  $description                 = 'generic service description',
   $success_exit_status         = undef,
   $restart_prevent_exit_status = undef,
   $service_exports             = undef,
