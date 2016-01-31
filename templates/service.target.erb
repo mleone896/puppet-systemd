@@ -3,14 +3,94 @@ Description=<%= @description %>
 After=syslog.target network.target basic.target
 
 [Service]
-Type=simple
+Type=<%= @service_type %>
 <%- if @environment_file %>
 EnvironmentFile=<%= @environment_file_location %>
 <%- end %>
+
 <%- if @user %>
 User=<%= @user %>
 <%- end %>
+
 <%- if @pidfile %>
 PIDFile= <%= @pidfile %>
 <%- end %>
+
+<%- if @exec_start_pre %>
+ExecStartPre=<%= @exec_start_pre %>
+<%- end %>
 ExecStart=<%= @start_command %>
+<%- if @exec_start_post %>
+ExecStartPost=<%= @exec_start_post %>
+<%- end %>
+
+<%- if @exec_reload %>
+ExecReload=<%= @exec_reload %>
+<%- end %>
+
+<%- if @exec_stop %>
+ExecStop=<% @exec_stop %>
+<%- end %>
+
+<%- if @exec_stop_post %>
+ExecStopPost=<%= @exec_stop_post%>
+<%- end %>
+
+<%-if @restart_sec  %>
+RestartSec=<%= @restart_sec %>
+<%- end %>
+
+<%- if @timeout_start_sec%>
+TimeoutStartSec=<%= @timeout_start_sec%>
+<%- end %>
+
+<%- if @timeout_stop_sec %>
+TimeoutStopSec=<%= @timeout_stop_sec %>
+<%- end %>
+
+<%- if @timeout_sec %>
+TimeoutSec=<%= @timeout_sec %>
+<%- end %>
+
+<%- if @restart %>
+Restart=<%= @restart %>
+<%- end %>
+
+<%- if @success_exit_status %>
+SuccessExitStatus=<%= @success_exit_status %>
+<%- end %>
+
+<%- if @restart_prevent_exit_status %>
+RestartPreventExitStatus=<%= @restart_prevent_exit_status %>
+<%- end %>
+
+<%- if @permission_start_only %>
+PermissionsStartOnly=<%= @permission_start_only %>
+<%- end %>
+
+<%- if @nonblocking %>
+NonBlocking=<%= @nonblocking %>
+<%- end %>
+
+<%- if @sockets %>
+Sockets=<%= @sockets%>
+<%- end %>
+
+<%- if @start_limit_interval %>
+StartLimitInterval=<%= @start_limit_interval %>
+<%- end %>
+
+<%- if @start_limit_burst %>
+StartLimitBurst=<%= @start_limit_burst %>
+<%- end %>
+
+<%- if @start_limit_action %>
+StartLimitAction=<%= @start_limit_action %>
+<%- end %>
+
+<%- if @failure_action %>
+FailureAction=<%= @failure_action %>
+<%- end %>
+
+[Install]
+WantedBy=<%= @wanted_by %>
